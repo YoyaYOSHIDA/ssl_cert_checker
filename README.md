@@ -48,4 +48,4 @@ Note that you don't need to consider whether HTTPS is available or not (in case 
 
 # Appendix
 
-You can use this script by modifying a little and running on a regular basis by cron and send the result to Slack if the expire date is comming not to forget the expire date of an SSL certificate.
+You can use this script by modifying a little and running on a regular basis by cron and send the result to Slack if the expire date of an SSL certificate is comming not to forget it.
