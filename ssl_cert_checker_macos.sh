@@ -17,8 +17,8 @@ for CLIENT_URL in $(cat ${SCRIPT_DIR}/servers.list | grep -v "^#"); do
   # Checks server is reachable
   if nc -vz -G 3 ${CLIENT_URL} 443 > /dev/null 2>&1; then
     # Validate SSL cert if reachable
-    if openssl s_client -connect ${CLIENT_URL}:443 < /dev/null 2> /dev/null | openssl x509 -text -noout -enddate > /dev/null 2>&1; then
-      PRE_RESULT="$(openssl s_client -connect ${CLIENT_URL}:443 < /dev/null 2> /dev/null | openssl x509 -text -noout -enddate | grep "Not After")"
+    if openssl s_client -connect ${CLIENT_URL}:443 -servername ${CLIENT_URL}  < /dev/null 2> /dev/null | openssl x509 -text -noout -enddate > /dev/null 2>&1; then
+      PRE_RESULT="$(openssl s_client -connect ${CLIENT_URL}:443 -servername ${CLIENT_URL} < /dev/null 2> /dev/null | openssl x509 -text -noout -enddate | grep "Not After")"
       PRE_VALID_UNTIL="$(echo ${PRE_RESULT} | gsed -E "s/^Not\sAfter\s+:\s+//g" | awk '{print $1" "$2" "$4}')"
       VALID_UNTIL="$(gdate -d "${PRE_VALID_UNTIL}" '+%Y%m%d')"
       VALID_UNTIL_UNIX="$(gdate --date "${VALID_UNTIL} 00:00" +%s)"
