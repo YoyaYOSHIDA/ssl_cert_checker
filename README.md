@@ -8,7 +8,7 @@ Based on: [do_not_forget_the_expire_date_of_ssl_ certificate_of_your_web_server.
 
 ## List URLs
 
-List URLs of web servers in [clients.list](./clients.list) .
+List URLs of web servers in [servers.list](./servers.list) .
 
 Example:
 

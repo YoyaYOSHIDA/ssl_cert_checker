@@ -13,7 +13,7 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 # dates
 DATE_TODAY_UNIX=$(date +%s)
 
-for CLIENT_URL in $(cat ${SCRIPT_DIR}/clients.list); do
+for CLIENT_URL in $(cat ${SCRIPT_DIR}/servers.list); do
   if openssl s_client -connect ${CLIENT_URL}:443 < /dev/null 2> /dev/null | openssl x509 -text -noout -enddate > /dev/null 2>&1; then
     PRE_RESULT="$(openssl s_client -connect ${CLIENT_URL}:443 < /dev/null 2> /dev/null | openssl x509 -text -noout -enddate | grep "Not After")"
     PRE_VALID_UNTIL="$(echo ${PRE_RESULT} | sed -E "s/^Not\sAfter\s+:\s+//g" | awk '{print $1" "$2" "$4}')"
