@@ -15,6 +15,7 @@ Example:
 ```
 myserver1.com
 myserver2.net
+# Comment lines can be input.
 myserver3.co.uk
 ```
 
@@ -37,12 +38,22 @@ Or for MacOS:
 The output will be for example:
 
 ```
-myserver1.com,Valid,20220303
-myserver2.net,Expired,20210101
-myserver3.co.uk,Unavailable,00000000
+myserver1.com,HttpsUnavailable,00000000
+myserver2.com,Valid,20210503
+myserver3.com,Expired,20171005
+myserver4.com,ServerUnreachableVia443,00000000
 ```
 
-The output syntax is `<URL>,<Valid | Expired | Unavailable>,<Last date of certificate lifetime>` .
+The output syntax is `<URL>,<Valid | Expired | HttpsUnavailable | ServerUnreachableVia443>,<Last date of certificate lifetime>` .
+
+-   `Valid`
+    -   HTTPS is available and SSL certificate is valid
+-   `Expired`
+    -   HTTPS is available but SSL certificate is expired
+-   `HttpsUnavailable`
+    -   The server might accept only HTTP
+-   `ServerUnreachableVia443`
+    -   The server is unreachable via 443/TCP
 
 Note that you don't need to consider whether HTTPS is available or not (in case of HTTPS is unavailable, the output will return `Unavailable`). 
 
